@@ -401,6 +401,8 @@ docker-compose up --build
 
 Le backend sera accessible sur http://localhost:5000.
 MySQL sera accessible sur le port 3306 (pour créer la table users, par exemple).
+
+
 B. Frontend (avec Vite) :
 Installez les dépendances du frontend :
 
@@ -417,3 +419,22 @@ Lancez le serveur de développement Vite :
 npm run dev
 ```
 L'application frontend sera disponible par défaut sur http://localhost:5173.
+
+Remarques Complémentaires
+Backend :
+Le backend utilise MySQL. Pour tester la route /users, créez dans MySQL la table users dans la base demo_binance avec par exemple :
+
+sql
+Copier
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+Frontend :
+La configuration avec Vite, React 18, Tailwind CSS et Chart.js est prête à l'emploi.
+Veillez à ajouter des effets de nettoyage dans vos hooks React pour éviter d'éventuelles fuites mémoire.
+
