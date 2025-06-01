@@ -32,7 +32,7 @@
 | Attribut         | Type                   | Description                                                   |
 |------------------|------------------------|---------------------------------------------------------------|
 | id               | INT AUTO_INCREMENT     | Identifiant unique                                            |
-| wallet_id        | INT                    | Référence au portefeuille (clé étrangère)                     |
+| holding_id       | INT                    | Référence au portefeuille de holding (clé étrangère)          |
 | crypto_symbol    | VARCHAR(10)            | Code de la cryptomonnaie (BTC, ETH, …)                        |
 | type             | ENUM('achat','vente')  | Nature de l’opération (achat ou vente)                        |
 | amount           | DECIMAL(18,8)          | Quantité de cryptomonnaie échangée                            |
@@ -66,7 +66,7 @@
 
 ## 8. Utilisateur_Module
 | Attribut      | Type       | Description                                            |
-|---------------|------------|--------------------------------------------------------|
+|---------------|------------|--------------------------------------------------------
 | user_id       | INT        | Référence à l’utilisateur (clé étrangère)              |
 | module_id     | INT        | Référence au module pédagogique (clé étrangère)        |
 | is_completed  | BOOLEAN    | Indicateur si le module est complété par l’utilisateur |
