@@ -18,9 +18,17 @@
 | user_id          | INT                | Référence à l’utilisateur (clé étrangère)                         |
 | created_at       | DATETIME           | Date de création du portefeuille                                  |
 | initial_balance  | DECIMAL(15,2)      | Solde virtuel de départ (ex. 10 000 $)                            |
-| total_value      | DECIMAL(15,2)      | Valeur totale actuelle (mise à jour après chaque transaction)     |
 
-## 3. Trade
+## 3. Wallet_Holding
+| Attribut       | Type               | Description                                           |
+|----------------|--------------------|-------------------------------------------------------|
+| holding_id     | INT AUTO_INCREMENT | Identifiant unique de la détention                    |
+| wallet_id      | INT                | Référence au portefeuille (clé étrangère)             |
+| crypto_symbol  | VARCHAR(10)        | Code de la cryptomonnaie (BTC, ETH, …)                |
+| quantity       | DECIMAL(18,8)      | Quantité détenue de la cryptomonnaie                  |
+| average_price  | DECIMAL(15,2)      | Prix moyen d’acquisition                              |
+
+## 4. Trade
 | Attribut         | Type                   | Description                                                   |
 |------------------|------------------------|---------------------------------------------------------------|
 | id               | INT AUTO_INCREMENT     | Identifiant unique                                            |
@@ -32,7 +40,7 @@
 | fee              | DECIMAL(15,2)          | Frais de transaction simulés                                  |
 | timestamp        | DATETIME               | Date et heure de l’opération                                  |
 
-## 4. Price
+## 5. Price
 | Attribut         | Type               | Description                                          |
 |------------------|--------------------|------------------------------------------------------|
 | id               | INT AUTO_INCREMENT | Identifiant unique                                   |
@@ -40,7 +48,7 @@
 | value            | DECIMAL(15,2)      | Valeur enregistrée (historique ou simulée)           |
 | recorded_at      | DATETIME           | Date et heure d’enregistrement du cours              |
 
-## 5. Learn
+## 6. Learn
 | Attribut      | Type               | Description                                     |
 |---------------|--------------------|-------------------------------------------------|
 | id            | INT AUTO_INCREMENT | Identifiant unique du module                    |
@@ -48,7 +56,7 @@
 | content       | TEXT               | Contenu pédagogique (texte, HTML ou Markdown)   |
 | order_index   | INT                | Position du module dans la séquence             |
 
-## 6. Préférence
+## 7. Préférence
 | Attribut   | Type               | Description                                            |
 |------------|--------------------|--------------------------------------------------------|
 | id         | INT AUTO_INCREMENT | Identifiant unique                                     |
@@ -56,7 +64,7 @@
 | key        | VARCHAR(100)       | Nom de la préférence (ex. 'theme', 'notifications')    |
 | value      | VARCHAR(255)       | Valeur associée (ex. 'dark', 'true')                   |
 
-## 7. Utilisateur_Module
+## 8. Utilisateur_Module
 | Attribut      | Type       | Description                                            |
 |---------------|------------|--------------------------------------------------------|
 | user_id       | INT        | Référence à l’utilisateur (clé étrangère)              |

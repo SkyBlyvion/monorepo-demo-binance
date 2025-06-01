@@ -12,10 +12,9 @@ CREATE TABLE `User` (
 -- 2. Table Wallet
 CREATE TABLE `Wallet` (
   `wallet_id` INT NOT NULL AUTO_INCREMENT,
-  `user_id` INT NOT NULL UNIQUE,
+  `user_id` INT NOT NULL,
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `initial_balance` DECIMAL(15,2) NOT NULL DEFAULT 10000.00,
-  `total_value` DECIMAL(15,2) NOT NULL DEFAULT 10000.00,
   PRIMARY KEY (`wallet_id`),
   CONSTRAINT `fk_wallet_user`
     FOREIGN KEY (`user_id`)
@@ -23,7 +22,23 @@ CREATE TABLE `Wallet` (
     ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 3. Table Trade
+--3. Nouvelle table Wallet_Holding
+CREATE TABLE `Wallet_Holding` (
+  `holding_id` INT NOT NULL AUTO_INCREMENT,
+  `wallet_id` INT NOT NULL,
+  `crypto_symbol` VARCHAR(10) NOT NULL,
+  `quantity` DECIMAL(18,8) NOT NULL DEFAULT 0.00000000,
+  `average_price` DECIMAL(15,2) NULL,
+  PRIMARY KEY (`holding_id`),
+  INDEX `idx_wh_wallet` (`wallet_id`),
+  INDEX `idx_wh_symbol` (`crypto_symbol`),
+  CONSTRAINT `fk_wh_wallet`
+    FOREIGN KEY (`wallet_id`)
+    REFERENCES `Wallet` (`wallet_id`)
+    ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 4. Table Trade
 CREATE TABLE `Trade` (
   `trade_id` INT NOT NULL AUTO_INCREMENT,
   `wallet_id` INT NOT NULL,
@@ -41,7 +56,7 @@ CREATE TABLE `Trade` (
     ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 4. Table Price
+-- 5. Table Price
 CREATE TABLE `Price` (
   `price_id` INT NOT NULL AUTO_INCREMENT,
   `crypto_symbol` VARCHAR(10) NOT NULL,
@@ -51,7 +66,7 @@ CREATE TABLE `Price` (
   INDEX `idx_price_symbol_time` (`crypto_symbol`, `recorded_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 5. Table Learn (Module_Pedagogique)
+-- 6. Table Learn (Module_Pedagogique)
 CREATE TABLE `Learn` (
   `learn_id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(150) NOT NULL,
@@ -60,7 +75,7 @@ CREATE TABLE `Learn` (
   PRIMARY KEY (`learn_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 6. Table Preference
+-- 7. Table Preference
 CREATE TABLE `Preference` (
   `preference_id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
@@ -74,7 +89,7 @@ CREATE TABLE `Preference` (
     ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 7. Table User_Learn (jonction Utilisateur / Learn)
+-- 8. Table User_Learn (jonction Utilisateur / Learn)
 CREATE TABLE `User_Learn` (
   `user_id` INT NOT NULL,
   `learn_id` INT NOT NULL,
