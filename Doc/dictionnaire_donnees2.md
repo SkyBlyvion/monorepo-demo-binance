@@ -24,7 +24,7 @@
 | Attribut         | Type                   | Description                                                   |
 |------------------|------------------------|---------------------------------------------------------------|
 | id               | INT AUTO_INCREMENT     | Identifiant unique                                            |
-| portfolio_id     | INT                    | Référence au portefeuille (clé étrangère)                     |
+| wallet_id        | INT                    | Référence au portefeuille (clé étrangère)                     |
 | crypto_symbol    | VARCHAR(10)            | Code de la cryptomonnaie (BTC, ETH, …)                        |
 | type             | ENUM('achat','vente')  | Nature de l’opération (achat ou vente)                        |
 | amount           | DECIMAL(18,8)          | Quantité de cryptomonnaie échangée                            |
